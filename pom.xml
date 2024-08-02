@@ -48,6 +48,7 @@
 
         <!-- this is a default that will be overridden on the command line with -DgitVersion= -->
         <gitVersion>${project.version}</gitVersion>
+        <kotlin.version>1.9.24</kotlin.version>   
     </properties>
 
     <repositories>
@@ -57,6 +58,16 @@
             <url>https://vassalengine.org/maven/</url>
         </repository>
     </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-stdlib</artifactId>
+                <version>${kotlin.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <pluginManagement>
@@ -149,6 +160,11 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-pmd-plugin</artifactId>
                     <version>3.23.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-maven-plugin</artifactId>
+                    <version>${kotlin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
