@@ -27,17 +27,12 @@ import java.nio.file.Files;
 import javax.swing.JOptionPane;
 
 import VASSAL.build.AbstractToolbarItem;
-import VASSAL.build.AutoConfigurable;
 import VASSAL.build.Buildable;
 import VASSAL.build.GameModule;
 import VASSAL.build.module.Map;
 import VASSAL.build.module.documentation.HelpFile;
-import VASSAL.configure.Configurer;
-import VASSAL.configure.ConfigurerFactory;
-import VASSAL.configure.IconConfigurer;
 import VASSAL.counters.GamePiece;
 import VASSAL.i18n.Resources;
-import VASSAL.tools.LaunchButton;
 import VASSAL.tools.WriteErrorDialog;
 import VASSAL.tools.filechooser.FileChooser;
 
@@ -46,15 +41,7 @@ public class TextSaver extends AbstractToolbarItem {
   protected static final String BUTTON_TEXT = "buttonText"; //NON-NLS
   protected static final String ICON_NAME = "icon"; //NON-NLS
 
-  // These two identical to AbstractToolbarItem and exist only for clirr purposes
-  @Deprecated protected static final String HOTKEY = "hotkey"; //NON-NLS
-  @Deprecated protected static final String TOOLTIP = "tooltip"; //NON-NLS
-
   protected Map map;
-
-  /** @deprecated use launch from the superclass */
-  @Deprecated(since = "2021-04-03", forRemoval = true)
-  protected LaunchButton launch;
 
   public TextSaver() {
     setNameKey("");
@@ -68,19 +55,6 @@ public class TextSaver extends AbstractToolbarItem {
       e -> apply()
     ));
     launch = getLaunchButton(); // for compatibility
-  }
-
-  /** @deprecated Use {@link VASSAL.build.AbstractToolbarItem.IconConfig} instead. */
-  @Deprecated(since = "2020-10-01", forRemoval = true)
-  public static class IconConfig implements ConfigurerFactory {
-    @Override
-    public Configurer getConfigurer(AutoConfigurable c, String key, String name) {
-      return new IconConfigurer(
-        key,
-        name,
-        ((TextSaver) c).getLaunchButton().getAttributeValueString(ICON_NAME)
-      );
-    }
   }
 
   @Override

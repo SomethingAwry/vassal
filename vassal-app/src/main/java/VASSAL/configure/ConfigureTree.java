@@ -214,14 +214,8 @@ public class ConfigureTree extends JTree implements PropertyChangeListener, Mous
   protected JTextField searchField;
   protected JRadioButton searchFiltered;
 
-  @Deprecated(since = "2023-10-17", forRemoval = true)
-  protected JCheckBox searchAdvanced;
-
   private final SearchParameters searchParameters;
   protected static Chatter chatter;
-
-  @Deprecated(since = "2022-08-08", forRemoval = true)
-  public static final Font POPUP_MENU_FONT = new Font(Font.DIALOG, Font.PLAIN, 11);
   protected static final List<AdditionalComponent> additionalComponents = new ArrayList<>();
 
   // Internal names of module classes; used where system literals are required rather than translate codes (shown in comment)
@@ -345,15 +339,6 @@ public class ConfigureTree extends JTree implements PropertyChangeListener, Mous
   protected void setSearchAdvanced(JRadioButton searchFiltered) {
     this.searchFiltered = searchFiltered;
   }
-
-  @Deprecated(since = "2023-10-17", forRemoval = true)
-  protected void setSearchAdvanced(JCheckBox searchAdvanced) {
-  }
-  @Deprecated(since = "2023-10-17", forRemoval = true)
-  protected JCheckBox getSearchAdvanced() {
-    return searchAdvanced;
-  }
-
 
   public JFrame getFrame() {
     return editorWindow;
@@ -3034,16 +3019,6 @@ public class ConfigureTree extends JTree implements PropertyChangeListener, Mous
           hitCheck(s, regexPattern, matchString, item, desc, show, progress);
         }
       }
-    }
-
-    @Deprecated (since = "2023-10-21", forRemoval = true)
-    private void showConfigurableHitList(DefaultMutableTreeNode node, Pattern regexPattern) {
-      final Configurable c = (Configurable) node.getUserObject();
-      final String item = getConfigureName(c.getClass());
-      final String name = StringUtils.defaultString(c.getConfigureName());
-      final String matchString = Resources.getString("Editor.search_matches", nodeListIndex) + "<b>" + noHTML(name + " [" + item + "]") + "</b>: ";
-      final TargetProgress progress = new TargetProgress();
-      showConfigurableHitList(node, regexPattern, matchString, progress);
     }
 
     /**

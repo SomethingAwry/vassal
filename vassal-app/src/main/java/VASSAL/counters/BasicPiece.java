@@ -48,9 +48,7 @@ import javax.swing.JLabel;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import java.awt.Component;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
@@ -112,10 +110,6 @@ public class BasicPiece extends AbstractImageFinder implements TranslatablePiece
   public static final String STACK_SIZE = "StackSize";
   public static final String UNIQUE_ID = "UniqueID";
 
-
-  @Deprecated(since = "2022-08-08", forRemoval = true)
-  public static Font POPUP_MENU_FONT = new Font(Font.DIALOG, Font.PLAIN, 11);
-
   protected JPopupMenu popup;
   protected Rectangle imageBounds;
   protected ScaledImagePainter imagePainter = new ScaledImagePainter();
@@ -145,9 +139,6 @@ public class BasicPiece extends AbstractImageFinder implements TranslatablePiece
   /** @deprecated Moved into own traits, retained for backward compatibility */
   @Deprecated(since = "2021-12-01", forRemoval = true)
   private char deleteKey;
-  /** @deprecated Replaced by #srcOp. */
-  @Deprecated(since = "2021-12-01", forRemoval = true)
-  protected Image image;           // BasicPiece's own image
   protected String imageName;      // BasicPiece image name
   private String commonName;       // BasicPiece's name for the piece (aka "BasicName" property in Vassal Module)
 

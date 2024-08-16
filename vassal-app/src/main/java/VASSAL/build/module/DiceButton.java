@@ -32,7 +32,6 @@ import VASSAL.configure.AutoConfigurer;
 import VASSAL.configure.Configurer;
 import VASSAL.configure.ConfigurerFactory;
 import VASSAL.configure.ConfigurerWindow;
-import VASSAL.configure.IconConfigurer;
 import VASSAL.configure.PlayerIdFormattedExpressionConfigurer;
 import VASSAL.configure.TranslatingStringEnumConfigurer;
 import VASSAL.configure.VisibilityCondition;
@@ -40,7 +39,6 @@ import VASSAL.i18n.Resources;
 import VASSAL.i18n.TranslatableConfigurerFactory;
 import VASSAL.search.HTMLImageFinder;
 import VASSAL.tools.FormattedString;
-import VASSAL.tools.LaunchButton;
 import VASSAL.tools.swing.SwingUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -104,21 +102,10 @@ public class DiceButton extends AbstractToolbarItem {
   protected static final String KEEP_GREATER = ">";
   protected static final String KEEP_LESS = "<";
 
-  /** @deprecated use launch from the superclass */
-  @Deprecated(since = "2021-04-03", forRemoval = true)
-  protected LaunchButton launch;
-
   protected String tooltip = ""; //$NON-NLS-1$
   protected final MutableProperty.Impl property = new Impl("", this);
   protected final MutableProperty.Impl totalProp = new Impl("", this);
   protected final MutableProperty.Impl keepProp = new Impl("", this);
-
-  // These five identical to AbstractToolbarItem, and are only here for "clirr purposes"
-  @Deprecated(since = "2020-10-21", forRemoval = true) public static final String BUTTON_TEXT = "text"; //$NON-NLS-1$
-  @Deprecated(since = "2020-10-21", forRemoval = true) public static final String TOOLTIP = "tooltip"; //$NON-NLS-1$
-  @Deprecated(since = "2020-10-21", forRemoval = true) public static final String NAME = "name"; //$NON-NLS-1$
-  @Deprecated(since = "2020-10-21", forRemoval = true) public static final String ICON = "icon"; //$NON-NLS-1$
-  @Deprecated(since = "2020-10-21", forRemoval = true) public static final String HOTKEY = "hotkey"; //$NON-NLS-1$
 
   public static final String DEPRECATED_NAME = "label"; //$NON-NLS-1$
   public static final String N_DICE = "nDice"; //$NON-NLS-1$
@@ -419,15 +406,6 @@ public class DiceButton extends AbstractToolbarItem {
       Resources.getString("Editor.DiceButton.keep_option"),
       Resources.getString("Editor.DiceButton.keep_count")
     );
-  }
-
-  /** @deprecated Use {@link VASSAL.build.AbstractToolbarItem.IconConfig} instead. */
-  @Deprecated(since = "2020-10-01", forRemoval = true)
-  public static class IconConfig implements ConfigurerFactory {
-    @Override
-    public Configurer getConfigurer(final AutoConfigurable c, final String key, final String name) {
-      return new IconConfigurer(key, name, "/images/die.gif"); //$NON-NLS-1$
-    }
   }
 
   public static class ReportFormatConfig implements TranslatableConfigurerFactory {

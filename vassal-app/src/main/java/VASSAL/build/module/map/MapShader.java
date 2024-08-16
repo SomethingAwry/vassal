@@ -30,8 +30,6 @@ import VASSAL.build.module.map.boardPicker.Board;
 import VASSAL.command.Command;
 import VASSAL.configure.ColorConfigurer;
 import VASSAL.configure.Configurer;
-import VASSAL.configure.ConfigurerFactory;
-import VASSAL.configure.IconConfigurer;
 import VASSAL.configure.StringArrayConfigurer;
 import VASSAL.configure.TranslatableStringEnum;
 import VASSAL.configure.VisibilityCondition;
@@ -94,14 +92,6 @@ public class MapShader extends AbstractToolbarItem implements GameComponent, Dra
   public static final String INC_BOARDS = "No, only shade Boards in List"; //NON-NLS (really)
 
   public static final String ADD_TO_MAP_TOOLBAR = "addToMapToolbar";
-
-  // No longer used but maintained in case class has been referenced in custom code
-  @Deprecated(since = "2023-08-13")
-  protected static final UniqueIdManager idMgr = new UniqueIdManager("MapShader"); //NON-NLS
-
-  /** @deprecated use launch from the superclass */
-  @Deprecated(since = "2021-04-03", forRemoval = true)
-  protected LaunchButton launch;
 
   protected boolean alwaysOn = false;
   protected boolean startsOn = false;
@@ -663,18 +653,6 @@ public class MapShader extends AbstractToolbarItem implements GameComponent, Dra
   @Override
   public Command getRestoreCommand() {
     return null;
-  }
-
-  /** @deprecated Use {@link VASSAL.build.AbstractToolbarItem.IconConfig} instead. */
-  @Deprecated(since = "2020-10-01", forRemoval = true)
-  public static class IconConfig implements ConfigurerFactory {
-    @Override
-    public Configurer getConfigurer(AutoConfigurable c, String key, String name) {
-      return new IconConfigurer(
-        key, name,
-        ((MapShader) c).getLaunchButton().getAttributeValueString(ICON)
-      );
-    }
   }
 
   protected void buildPatternAndTexture() {

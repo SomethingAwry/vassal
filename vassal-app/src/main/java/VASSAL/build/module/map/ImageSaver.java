@@ -18,11 +18,6 @@
 package VASSAL.build.module.map;
 
 import VASSAL.build.AbstractToolbarItem;
-import VASSAL.build.AutoConfigurable;
-import VASSAL.configure.Configurer;
-import VASSAL.configure.ConfigurerFactory;
-import VASSAL.configure.IconConfigurer;
-import VASSAL.tools.LaunchButton;
 import VASSAL.tools.swing.SwingUtils;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -63,10 +58,6 @@ import VASSAL.tools.swing.ProgressDialog;
  * a PNG file.
  */
 public class ImageSaver extends AbstractToolbarItem {
-  /** @deprecated use launch from the superclass */
-  @Deprecated(since = "2021-04-03", forRemoval = true)
-  protected LaunchButton launch;
-
   protected Map map;
   protected boolean promptToSplit = false;
   protected static final String DEFAULT_ICON = "/images/camera.gif"; //NON-NLS
@@ -117,15 +108,6 @@ public class ImageSaver extends AbstractToolbarItem {
     map.getToolBar().remove(getLaunchButton());
     map.getToolBar().revalidate();
     GameModule.getGameModule().getGameState().removeGameComponent(this);
-  }
-
-  /** @deprecated Use {@link VASSAL.build.AbstractToolbarItem.IconConfig} instead. */
-  @Deprecated(since = "2020-10-01", forRemoval = true)
-  public static class IconConfig implements ConfigurerFactory {
-    @Override
-    public Configurer getConfigurer(AutoConfigurable c, String key, String name) {
-      return new IconConfigurer(key, name, DEFAULT_ICON);
-    }
   }
 
   /**

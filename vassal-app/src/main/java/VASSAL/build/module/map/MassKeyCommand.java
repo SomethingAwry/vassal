@@ -30,7 +30,6 @@ import VASSAL.configure.Configurer;
 import VASSAL.configure.ConfigurerFactory;
 import VASSAL.configure.FormattedExpressionConfigurer;
 import VASSAL.configure.GlobalCommandTargetConfigurer;
-import VASSAL.configure.IconConfigurer;
 import VASSAL.configure.IntConfigurer;
 import VASSAL.configure.NamedHotKeyConfigurer;
 import VASSAL.configure.Parameter;
@@ -53,9 +52,7 @@ import VASSAL.i18n.Resources;
 import VASSAL.i18n.TranslatableConfigurerFactory;
 import VASSAL.script.expression.AuditTrail;
 import VASSAL.script.expression.Auditable;
-import VASSAL.script.expression.FormattedStringExpression;
 import VASSAL.tools.FormattedString;
-import VASSAL.tools.LaunchButton;
 import VASSAL.tools.NamedKeyStroke;
 import VASSAL.tools.RecursionLimiter;
 import VASSAL.tools.ToolBarComponent;
@@ -110,17 +107,6 @@ public class MassKeyCommand extends AbstractToolbarItem
   public static final String SINGLE_MAP = "singleMap"; // NON-NLS
   public static final String SUPPRESS_SOUNDS = "suppressSounds"; //NON-NLS
   public static final String PARAMETERS = "parameters"; //NON-NLS
-
-  // TODO: When these are removed, look for all of the "removal" warning
-  // suppressions we added for them, and remove those.
-  // These 3 identical to AbstractToolbarItem and here for clirr purposes only
-  @Deprecated(since = "2020-10-21", forRemoval = true) public static final String NAME = "name"; // NON-NLS
-  @Deprecated(since = "2020-10-21", forRemoval = true) public static final String ICON = "icon"; // NON-NLS
-  @Deprecated(since = "2020-10-21", forRemoval = true) public static final String TOOLTIP = "tooltip"; // NON-NLS
-
-  /** @deprecated use launch from the superclass */
-  @Deprecated(since = "2020-10-21", forRemoval = true)
-  protected LaunchButton launch; // Exists for clirr - but use getLaunchButton()
 
   protected NamedKeyStroke stroke = NamedKeyStroke.NULL_KEYSTROKE;
   protected String[] names = new String[0];
@@ -331,15 +317,6 @@ public class MassKeyCommand extends AbstractToolbarItem
     }
   }
 
-  /** @deprecated Use {@link VASSAL.build.AbstractToolbarItem.IconConfig} instead. */
-  @Deprecated(since = "2020-10-01", forRemoval = true)
-  public static class IconConfig implements ConfigurerFactory {
-    @Override
-    public Configurer getConfigurer(AutoConfigurable c, String key, String name) {
-      return new IconConfigurer(key, name, "/images/keyCommand.gif"); //NON-NLS
-    }
-  }
-
   public static class ReportFormatConfig implements TranslatableConfigurerFactory {
     @Override
     public Configurer getConfigurer(AutoConfigurable c, String key, String name) {
@@ -429,22 +406,6 @@ public class MassKeyCommand extends AbstractToolbarItem
       }
       else {
         return piecesConfig.getValueString();
-      }
-    }
-
-    /**
-     * Legacy version for binary compability. Will attempt to return something resembling the old integer value.
-     * @return Will attempt to return something resembling the old integer value.
-     */
-    @Deprecated
-    public int getIntValue() {
-      final String s = getSingleValue();
-      try {
-        return Integer.parseInt(s);
-      }
-      catch (NumberFormatException e) {
-        final FormattedStringExpression exp = new FormattedStringExpression(s);
-        return Integer.parseInt(exp.tryEvaluate(GameModule.getGameModule(), this, "Editor.GlobalKeyCommand.zone_name"));
       }
     }
 

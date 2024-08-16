@@ -55,7 +55,6 @@ import VASSAL.build.module.documentation.HelpFile;
 import VASSAL.build.module.folder.ModuleSubFolder;
 import VASSAL.build.module.gamepieceimage.GamePieceImageDefinitions;
 import VASSAL.build.module.index.IndexManager;
-import VASSAL.build.module.map.CounterDetailViewer;
 import VASSAL.build.module.metadata.AbstractMetaData;
 import VASSAL.build.module.metadata.MetaDataFactory;
 import VASSAL.build.module.metadata.ModuleMetaData;
@@ -559,15 +558,6 @@ public class GameModule extends AbstractConfigurable
    */
   public boolean isLoadingContinuationSemaphore() {
     return loadingContinuationSemaphore;
-  }
-
-  /**
-   * @return the top-level frame of the controls window
-   * @deprecated use {@link #getPlayerWindow()}
-   */
-  @Deprecated(since = "2020-08-06", forRemoval = false)
-  public JFrame getFrame() {
-    return frame;
   }
 
   /**
@@ -1708,15 +1698,6 @@ public class GameModule extends AbstractConfigurable
   }
 
   /**
-   * @deprecated use {@link #updateTitleBar()}
-   * @param s String to append to title
-   */
-  @Deprecated(since = "2020-09-16", forRemoval = true)
-  public void appendToTitle(String s) {
-    // replaced by updateTitleBar()
-  }
-
-  /**
    * Sets the most recent .VSAV / .VLOG file saved, loaded, or logged to, along with
    * the type of action taken with that file.
    * @param gameFile Most recent VSAV/VLOG if any
@@ -2285,12 +2266,6 @@ public class GameModule extends AbstractConfigurable
     }
     else if (GAME_FILENAME_PROPERTY.equals(key)) {
       return gameFile;
-    }
-    else if (DRAWING_MOUSEOVER_PROPERTY.equals(key)) {
-      return CounterDetailViewer.isDrawingMouseOver();
-    }
-    else if (DRAWING_MOUSEOVER_INDEX_PROPERTY.equals(key)) {
-      return CounterDetailViewer.isDrawingMouseOver() ? "2" : "1";
     }
     else if (UI_PIECE_COUNT.equals(key)) {
       return String.valueOf(getUiPieceCount());

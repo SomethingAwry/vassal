@@ -1581,46 +1581,8 @@ public class PieceMover extends AbstractBuildable
       return dropTargetListeners.get(component);
     }
 
-    /**
-     * Moves the drag cursor on the current draw window
-     * @param dragX x position
-     * @param dragY y position
-     */
-    @Deprecated(since = "2023-05-08", forRemoval = true)
-    protected void moveDragCursor(int dragX, int dragY) {}
-
-    /**
-     * Removes the drag cursor from the current draw window
-     */
-    @Deprecated(since = "2023-05-08", forRemoval = true)
-    protected void removeDragCursor() {}
-
     /** calculates the offset between cursor dragCursor positions */
     protected void calcDrawOffset() {}
-
-    /**
-     * creates or moves cursor object to given window. Called when drag
-     * operation begins in a window or the cursor is dragged over a new
-     * drop-target window
-     *
-     * @param newDropWin window component to be our new draw window.
-     */
-    @Deprecated(since = "2023-05-08", forRemoval = true)
-    public void setDrawWinToOwnerOf(Component newDropWin) {}
-
-    /**
-     * Common functionality abstracted from makeDragImage and makeDragCursor
-     *
-     * @param zoom Zoom Level
-     * @param doOffset Drag Offset
-     * @param target Target Component
-     * @param setSize Set Size
-     * @return Drag Image
-     */
-    @Deprecated(since = "2023-05-08", forRemoval = true)
-    protected BufferedImage makeDragImageCursorCommon(double zoom, boolean doOffset, Component target, boolean setSize) {
-      return makeDragImageCursorCommon(zoom, 1.0, doOffset, target);
-    }
 
     protected BufferedImage makeDragImageCursorCommon(double mapzoom, double os_scale, boolean doOffset, Component target) {
       // FIXME: Should be an ImageOp for caching?
@@ -1668,15 +1630,12 @@ public class PieceMover extends AbstractBuildable
      * Creates the image to use when dragging based on the zoom factor
      * passed in.
      *
-     * @param zoom DragBuffer.getBuffer
+     * @param mapzoom DragBuffer.getBuffer
      * @return dragImage
      */
     private BufferedImage makeDragImage(double mapzoom, double os_scale) {
       return makeDragImageCursorCommon(mapzoom, os_scale, false, null);
     }
-
-    @Deprecated(since = "2023-05-08", forRemoval = true)
-    protected void makeDragCursor(double zoom) {}
 
     private List<Point> buildBoundingBox() {
       // boundingBox and relativePositions are constructed in map
@@ -2156,15 +2115,8 @@ public class PieceMover extends AbstractBuildable
       makeDragCursor(dragPieceOffCenterZoom, getDeviceScale(dge));
       setDrawWinToOwnerOf(dragWin);
       SwingUtilities.convertPointToScreen(mousePosition, drawWin);
-      moveDragCursor(mousePosition.x, mousePosition.y);
 
       super.dragGestureRecognized(dge);
-    }
-
-    @Override
-    @Deprecated(since = "2023-05-15", forRemoval = true)
-    protected void makeDragCursor(double zoom) {
-      makeDragCursor(zoom, 1.0);
     }
 
     /**
@@ -2186,32 +2138,6 @@ public class PieceMover extends AbstractBuildable
       dragCursor.setSize(img.getWidth(), img.getHeight());
       dragCursor.setIcon(new ImageIcon(img));
       dragCursorZoom = zoom;
-    }
-
-    /**
-     * Moves the drag cursor on the current draw window
-     * @param dragX x position
-     * @param dragY y position
-     */
-    @Override
-    protected void moveDragCursor(int dragX, int dragY) {
-      if (drawWin != null) {
-        dragCursor.setLocation(dragX - drawOffset.x, dragY - drawOffset.y);
-      }
-    }
-
-    /**
-     * Removes the drag cursor from the current draw window
-     */
-    @Override
-    protected void removeDragCursor() {
-      if (drawWin != null) {
-        if (dragCursor != null) {
-          dragCursor.setVisible(false);
-          drawWin.remove(dragCursor);
-        }
-        drawWin = null;
-      }
     }
 
     /**
@@ -2253,7 +2179,6 @@ public class PieceMover extends AbstractBuildable
      * dragged over a new drop-target window
      * @param newDropWin window component to be our new draw window.
      */
-    @Override
     public void setDrawWinToOwnerOf(Component newDropWin) {
       if (newDropWin != null) {
         final JRootPane rootWin = SwingUtilities.getRootPane(newDropWin);
@@ -2280,7 +2205,6 @@ public class PieceMover extends AbstractBuildable
 
     @Override
     public void dragDropEnd(DragSourceDropEvent e) {
-      removeDragCursor();
       super.dragDropEnd(e);
     }
 
@@ -2290,7 +2214,6 @@ public class PieceMover extends AbstractBuildable
       if (!e.getLocation().equals(lastDragLocation)) {
         lastDragLocation = e.getLocation();
 
-        moveDragCursor(e.getX(), e.getY());
         if (dragCursor != null && !dragCursor.isVisible()) {
           dragCursor.setVisible(true);
         }
@@ -2314,7 +2237,6 @@ public class PieceMover extends AbstractBuildable
 
     @Override
     public void drop(DropTargetDropEvent e) {
-      removeDragCursor();
       super.drop(e);
     }
   }

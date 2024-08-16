@@ -32,8 +32,6 @@ import VASSAL.configure.AudioClipConfigurer;
 import VASSAL.configure.Configurer;
 import VASSAL.configure.ConfigurerFactory;
 import VASSAL.configure.FormattedExpressionConfigurer;
-import VASSAL.configure.IconConfigurer;
-import VASSAL.configure.ListConfigurer;
 import VASSAL.configure.NamedHotKeyConfigurer;
 import VASSAL.configure.NamedKeyStrokeArrayConfigurer;
 import VASSAL.configure.PlayerIdFormattedExpressionConfigurer;
@@ -44,7 +42,6 @@ import VASSAL.i18n.Resources;
 import VASSAL.i18n.TranslatableConfigurerFactory;
 import VASSAL.search.HTMLImageFinder;
 import VASSAL.tools.FormattedString;
-import VASSAL.tools.LaunchButton;
 import VASSAL.tools.LoopControl;
 import VASSAL.tools.NamedKeyStroke;
 import VASSAL.tools.RecursionLimitException;
@@ -83,17 +80,6 @@ public class DoActionButton extends AbstractToolbarItem
   public static final String INDEX_PROPERTY = "indexProperty"; //$NON-NLS-1$
   public static final String INDEX_START = "indexStart"; //$NON-NLS-1$
   public static final String INDEX_STEP = "indexStep"; //$NON-NLS-1$
-
-  // These 5 items are identical to those in AbstractToolItem and exist only for "clirr purposes"
-  @Deprecated(since = "2020-10-21", forRemoval = true) public static final String BUTTON_TEXT = "text"; //$NON-NLS-1$
-  @Deprecated(since = "2020-10-21", forRemoval = true) public static final String TOOLTIP = "tooltip"; //$NON-NLS-1$
-  @Deprecated(since = "2020-10-21", forRemoval = true) public static final String NAME = "name"; //$NON-NLS-1$
-  @Deprecated(since = "2020-10-21", forRemoval = true) public static final String HOTKEY = "hotkey"; //$NON-NLS-1$
-  @Deprecated(since = "2020-10-21", forRemoval = true) public static final String ICON = "icon"; //$NON-NLS-1$
-
-  /** @deprecated use launch from the superclass */
-  @Deprecated(since = "2021-04-03", forRemoval = true)
-  protected LaunchButton launch;
 
   protected boolean doReport = false;
   protected FormattedString reportFormat =
@@ -217,15 +203,6 @@ public class DoActionButton extends AbstractToolbarItem
     );
   }
 
-  /** @deprecated Use {@link VASSAL.build.AbstractToolbarItem.IconConfig} instead. */
-  @Deprecated(since = "2020-10-01", forRemoval = true)
-  public static class IconConfig implements ConfigurerFactory {
-    @Override
-    public Configurer getConfigurer(AutoConfigurable c, String key, String name) {
-      return new IconConfigurer(key, name, null);
-    }
-  }
-
   public static class SoundConfig implements ConfigurerFactory {
     @Override
     public Configurer getConfigurer(AutoConfigurable c, String key, String name) {
@@ -244,21 +221,6 @@ public class DoActionButton extends AbstractToolbarItem
     @Override
     public Configurer getConfigurer(AutoConfigurable c, String key, String name) {
       return new NamedKeyStrokeArrayConfigurer(key, name, ((DoActionButton) c).hotkeys);
-    }
-  }
-
-  /**
-   * @deprecated not replaced
-   */
-  @Deprecated(since = "2020-10-21", forRemoval = true)
-  public static class NamedHotkeyListConfigurer extends ListConfigurer {
-    public NamedHotkeyListConfigurer(String key, String name, List<NamedKeyStroke> list) {
-      super(key, name, list);
-    }
-
-    @Override
-    protected Configurer buildChildConfigurer() {
-      return new NamedHotKeyConfigurer(null, Resources.getString(Resources.HOTKEY_LABEL));
     }
   }
 

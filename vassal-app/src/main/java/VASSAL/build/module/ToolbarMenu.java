@@ -61,12 +61,6 @@ public class ToolbarMenu extends AbstractToolbarItem
                                     GameComponent {
   public static final String DESCRIPTION = "description"; //NON-NLS //non-standard legacy name key different from AbstractToolbarItem
 
-  // These four items here for clirr purposes
-  @Deprecated(since = "2020-10-21", forRemoval = true) public static final String BUTTON_TEXT = "text"; //$NON-NLS-1$
-  @Deprecated(since = "2020-10-21", forRemoval = true) public static final String BUTTON_ICON = "icon"; //$NON-NLS-1$
-  @Deprecated(since = "2020-10-21", forRemoval = true) public static final String BUTTON_HOTKEY = "hotkey"; //$NON-NLS-1$
-  @Deprecated(since = "2020-10-21", forRemoval = true) public static final String TOOLTIP = "tooltip"; //$NON-NLS-1$
-
   public static final String MENU_ITEMS = "menuItems"; //$NON-NLS-1$
   /** Buttons where this property contains a JPopupMenu will turn into sub-menus */
   public static final String MENU_PROPERTY = "ToolbarMenu.popup"; //$NON-NLS-1$
@@ -75,10 +69,6 @@ public class ToolbarMenu extends AbstractToolbarItem
   protected List<String> menuItems = new ArrayList<>();
   protected Map<AbstractButton, JMenuItem> buttonsToMenuMap =
     new HashMap<>();
-
-  /** @deprecated use launch from the superclass */
-  @Deprecated(since = "2021-04-03", forRemoval = true)
-  protected LaunchButton launch;
 
   protected JToolBar toolbar;
   protected JPopupMenu menu;
