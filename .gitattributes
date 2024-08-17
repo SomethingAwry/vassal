@@ -1,1 +1,49 @@
-vassal-app/src/test/resources/TailerTest.txt eol=lf
+# specifying eol also specifies the file as text
+# git files
+.gitattributes eol=lf
+.gitignore eol=lf
+.gitmodules eol=lf
+.git-blame-ignore-revs eol=lf
+
+# *nix files 
+*.bsh eol=lf
+*.sh eol=lf
+
+# windows files
+*.bat eol=crlf
+*.cmd eol=crlf
+
+# MacOS files
+.DS_Store binary
+*.plist eol=lf
+
+# text, but eol to user-preference (likely same as platform)
+.editorconfig text
+*.adoc text
+*.fs text
+*.fsx text
+*.html text
+*.java text
+*.json text
+*.kt text
+*.kts text
+*.md text
+*.svg text
+*.xml text
+*.xslt text
+*.yml text
+*.yaml text
+
+# most definitely binary
+*.au binary
+*.dll binary
+*.gif binary
+*.icns binary
+*.ico binary
+*.jpeg binary
+*.jpg binary
+*.nsi binary
+*.pdb binary
+*.png binary
+*.wav binary
+*.zip binary
